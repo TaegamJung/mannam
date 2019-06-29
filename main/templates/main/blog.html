@@ -1,0 +1,34 @@
+{% extends "frame.html" %}
+
+
+{% block content %}
+
+        <h1>게시판 페이지입니다</h1>
+        <!-- 게시판(postlist)의 게시글(list)을 하나씩 보여줍니다 -->
+        <!-- {와 %로 이루어진 구문 내부엔 파이썬이 사용됩니다 -->
+
+
+        <!-- Grid 시스템을 사용 -->
+        <div class="row">
+            
+{% load static %}
+        <table>
+        {% for list in postlist %}
+           <div class="card" style="width: 18rem; height: auto;"> 
+    {% if list.mainphoto %}
+            <img src="{{list.mainphoto.url}}" class="card-img-top" height="150" alt="...">      
+            {% else %}
+            <img src="{% static 'no_image.png' %}" class="card-img-top" height="150" alt="...">
+            {% endif%}
+  <div class="card-body">
+    <h5 class="card-title">{{list.postname}}</h5>
+    <p class="card-text">{{list.contents}}</p>
+    <a href='https://mannam.run.goorm.io/blog/{{ list.pk }}/' class="btn btn-primary">게시글로 이동</a>
+  </div>
+</div>
+</div>
+            
+        {% endfor %}
+        </table>
+
+{% endblock %}

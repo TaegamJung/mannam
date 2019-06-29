@@ -1,0 +1,48 @@
+{% extends "frame.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+<div id="content">
+    <h1>New User Registration</h1>
+    <!-- 아이디, 비밀번호 입력창-->
+    <form action="." method="post">{% csrf_token %}
+        <!-- 에러 표시-->
+        {% if form.errors %}
+            <p class="errornote">Wrong! Please correct the errors below</p>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        
+        <p>Please enter your username, password</p>
+        <fieldset class="aligned">
+            <!-- 아이디 입력 -->
+            <div class="form-row">
+                {{ form.username.label_tag }} {{ form.username }}
+            </div>
+            <!-- 비밀번호 입력 1 -->
+            <div class="form-row">
+                {{ form.password1.label_tag }} {{ form.password1 }}
+            </div>
+            <!-- 비밀번호 입력 2 -->
+            <div class="form-row">
+                {{ form.password2.label_tag }} {{ form.password2 }}
+            </div>
+        </fieldset>
+        <!-- 제출 -->
+        <div class="submit-row">
+            <input type="submit" value="Register"/>
+        </div>
+        <script type="text/javascript">document.getElementById('id_username').focus();
+        </script>
+    </form>
+</div>
+{% endblock %}

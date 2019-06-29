@@ -1,0 +1,22 @@
+{% extends "frame.html" %}
+{% block title %} 만남 {% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %} {% endblock %}
+
+{% block content %}
+
+<h1>해달 프로그래밍 4조의 해커톤 프로젝트 '만남'</h1>
+
+        <!-- 정적 이미지 불러오기 -->
+        {% load static %}
+        <img src="{% static 'first.jpg' %}" width="650" height="400">
+
+<p>원하는 날, 새로운 인연 </p>
+<p> ‘만남’은 대학교 내에서 학생들 간의 인연을 찾아주고 원하는 시간에 만날 수 있게 도와주는 플랫폼입니다. </p> 
+
+<p1>SPONSORED BY</p1>  
+<p2><a href="http://xn--2i0by7gtsemwac9krp9bmwa.com/">해달 프로그래밍</a></p2>
+<p3><a href="https://www.goorm.io/">GOORM</a></p3>
+
+{% endblock %}

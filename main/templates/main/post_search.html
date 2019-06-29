@@ -1,0 +1,46 @@
+{% extends "frame.html" %}
+
+
+{% block content %}
+
+<div id= "content">
+    <h1>게시물 검색</h1>
+    
+    <form action="." method="post"> {% csrf_token %}
+        {{ form.as_table }}
+        <input type="submit" value="Submit" />
+    </form>
+    
+    <br/><br/>
+    {% load static %}
+
+    {% if object_list %} 
+    
+      <div class="row">
+            
+        <table>
+        {% for post in object_list %} 
+
+           <div class="card" style="width: 18rem; height: auto;"> 
+    {% if post.mainphoto %}
+            <img src="{{post.mainphoto.url}}" class="card-img-top" height="150" alt="...">      
+            {% else %}
+            <img src="{% static 'no_image.png' %}" class="card-img-top" height="150" alt="...">
+            {% endif%}
+  <div class="card-body">
+    <h5 class="card-title">{{post.postname}}</h5>
+    <p class="card-text">{{post.contents}}</p>
+    <a href='https://mannam.run.goorm.io/blog/{{ post.pk }}/' class="btn btn-primary">게시글로 이동</a>
+  </div>
+</div>
+</div>
+    {% endfor %}
+          
+    {% elif search_word %} 
+          <b><i> Search Word {{ search_word }} Not Found!  </i></b>
+    {% endif %}
+
+    </div>
+
+
+{% endblock %}

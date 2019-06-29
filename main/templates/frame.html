@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- 페이지 별 title 설정-->
+         <title>{% block title %}{% endblock %}</title>
+        <!-- 필요한 파일 및 CDN을 추가합니다-->
+        {% load staticfiles %}
+        <!-- 다음에 css를 만져봅니다-->
+        <link rel="stylesheet" type="text/css" href="{% static "css/frame.css" %}" />
+        <link rel="stylesheet" href="{% block extrastyle %}{% endblock %}" />
+        
+         <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        
+    </head>
+    <body>
+        
+         <!-- 홈페이지 상단에 nav가 들어갑니다-->
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">
+              <span style = " font-size:2em;  color: red;">
+                {% load static %}
+        <img src="{% static 'mannambar.png' %}" width="80" height="80">
+            </span>
+           </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">메인</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/blog">게시판</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/search" tabindex="-1" aria-disabled="true">검색</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                
+              <span class="navbar-text">
+                    <!-- 회원가입 부분 -->
+                    <div id="header">
+                        {% if user.is_active %}
+                    <h4>
+                        {% firstof user.get_short_name user.get_username %} |
+                            <a href="{% url 'password_change' %}">Change Password</a> |
+                        <a href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;
+                    </h4>
+                        {% else %}
+                    <h4>
+                        Welcome |
+                            <a href="{% url 'login' %}">Login</a> |
+                            <a href="{% url 'register' %}">Register</a>&nbsp;&nbsp;
+                    </h4>
+                        {% endif %}
+                    </div>
+              </span>
+            </form>
+          </div>
+        </nav>
+        
+        
+ 
+        
+       
+        
+        
+        <!-- 각 앱에서 만드는 페이지로 채울 부분-->
+        {% block content %}{% endblock %}
+        <!-- footer가 있다면 사용할 부분 -->
+        {% block footer %}{% endblock %}
+        
+        
+        
+        
+        
+    </body>
+</html>
